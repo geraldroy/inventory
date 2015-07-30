@@ -30,6 +30,18 @@ class Dashboard extends CI_Controller {
         $this->model_item->addItem();
 		$this->index();
 	}
+	
+	function editItem() {
+		$this->load->model('model_item');
+        $this->model_item->saveChanges();
+		$this->index();
+	}
+	
+	function deleteItem() {
+		$this->load->model('model_item');
+        $this->model_item->deleteItem();
+		$this->index();
+	}
 }
 
 /* End of file welcome.php */

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2015 at 05:49 AM
+-- Generation Time: Jul 30, 2015 at 09:22 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -27,22 +27,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(20) NOT NULL,
-  `description` varchar(50) NOT NULL,
+  `description` varchar(200) NOT NULL,
   `amount` float NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`code`, `description`, `amount`, `quantity`) VALUES
-('CMNT1', 'Cement 5kg', 4000, 20),
-('CMNT2', 'Cement 10kg', 6500, 15),
-('GD1', 'Gold 5g', 1000, 0),
-('GD2', 'Gold 10g', 3200, 0);
+INSERT INTO `item` (`id`, `code`, `description`, `amount`, `quantity`) VALUES
+(2, 'CM2', 'Cement 15g', 500, 3);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

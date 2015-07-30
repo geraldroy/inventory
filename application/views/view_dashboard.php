@@ -68,7 +68,6 @@
 												<th>Category</th>
 												<th>Amount (PHP)</th>
 												<th>Quantity</th>
-												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -79,22 +78,18 @@
 													echo '<td>Warehouse 1</td>';
 													echo '<td>'.number_format($item->amount, 2, '.', ',').'</td>';
 													echo '<td>'.$item->quantity.'</td>'; ?>
-													<td>
-														<a href=""><i class="fa fa-edit"></i> </a>
-														<a href=""><i class="fa fa-external-link"></i> </a>
-														<a href=""><i class="fa fa-remove"></i> </a>
-													</td>
 												</tr>
 												<div class="modal fade" id="viewItem" role="dialog">
 													<div class="modal-dialog modal-sm">
 														<!-- Modal content-->
 														<div class="modal-content">
-															<form action="<?php echo base_url();?>dashboard/createItem" method="post">
+															<form method="post">
 																<div class="modal-header">
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title">Inventory Item</h4>
 																</div>
 																<div class="modal-body">
+																	<input type="hidden" name="id" value="<?php echo $item->id; ?>">
 																	<label>Item Code</label>
 																	<div class="input-group">
 																		<span class="input-group-addon">#</span>
@@ -107,11 +102,13 @@
 																	<div class="input-group">
 																		<span class="input-group-addon">PHP</span>
 																		<input type="text" class="form-control" placeholder="Price" name="amount" value="<?php echo number_format($item->amount, 2, '.', ','); ?>">
-																	</div>
+																	</div><br>
+																	<label>Quantity</label><br>
+																	<input type="text" class="form-control" name="quantity" value="<?php echo $item->quantity; ?>" disabled>
 																</div>
 																<div class="modal-footer">
-																	<input type="submit" class="btn btn-block btn-primary" value="Save changes">
-																	<button type="button" class="btn btn-block btn-default" data-dismiss="modal">Delete item</button>
+																	<input type="submit" class="btn btn-block btn-primary" value="Save changes" formaction="<?php echo base_url();?>dashboard/editItem">
+																	<input type="submit" class="btn btn-block btn-default" value="Delete item" formaction="<?php echo base_url();?>dashboard/deleteItem">
 																</div>
 															</form>
 														</div>
