@@ -23,7 +23,7 @@
 									<h3 class="box-title">Inventory</h3>
 									<div class="pull-right">
 										<a class="btn btn-primary" data-toggle="modal" data-target="#createItem"><i class="fa fa-plus"></i> New Item</a>
-										<a class="btn btn-default" data-toggle="modal" data-target="#createItem"><i class="fa fa-plus"></i> Categories</a>
+										<a class="btn btn-default" data-toggle="modal" data-target="#categories"><i class="fa fa-plus"></i> Categories</a>
 									</div>
 									<div class="modal fade" id="createItem" role="dialog">
 										<div class="modal-dialog modal-sm">
@@ -58,6 +58,57 @@
 											</div>
 										</div>
 									</div>
+									<div class="modal fade" id="categories" role="dialog">
+										<div class="modal-dialog">
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4>Categories</h4>
+													<p>Categories or groups help you organize the items in your inventory.</p>
+												</div>
+												<div class="modal-body">
+													<style>
+														input.categories-cell {
+															background-color: transparent;
+															border-width: 0px 0px 0px 0px;
+															padding:0px;
+															height:20px;
+														}
+														input.categories-cell:focus {
+															border-width: 0px 0px 1px 0px;
+														}
+													</style>
+													<table class="table table-striped">
+														<tr>
+															<th style="width: 150px">Category Name</th>
+															<th style="width: 50px">Listing</th>
+															<th "width: 350px">Description</th>
+															<th>Action</th>
+														</tr>
+														<tr>
+															<td><input type="text" class="form-control categories-cell" placeholder="Category Name" value="Warehouse 1"></td>
+															<td>2</td>
+															<td><input type="text" class="form-control categories-cell" placeholder="Description" value="Located at Los Banos, Laguna"></td>
+															<td><a href="#">Save </a>&nbsp;<a href="#"> Delete</a></td>
+														</tr>
+														<tr>
+															<td><input type="text" class="form-control categories-cell" placeholder="Category Name" value="Warehouse 2"></td>
+															<td>15</td>
+															<td><input type="text" class="form-control categories-cell" placeholder="Description" value="Located at Kawit Cavite"></td>
+															<td><a href="#">Save </a>&nbsp;<a href="#"> Delete</a></td>
+														</tr>
+														<tr>
+															<td><input type="text" class="form-control" placeholder="Category Name" style="background-color: transparent; border-width: 0px 0px 1px 0px; padding:0px; height:20px;"></td>
+															<td></td>
+															<td><input type="text" class="form-control" placeholder="Description" style="background-color: transparent; border-width: 0px 0px 1px 0px; padding:0px; height:20px;"></td>
+															<td><a href="#">Add</a></td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div><!-- /.box-header -->
 								<div class="box-body">
 									<table id="example1" class="table table-bordered table-striped">
@@ -73,13 +124,13 @@
 										<tbody>
 											<?php
 												foreach($items->result() as $item) {
-													echo '<tr><td><a href="#" data-toggle="modal" data-target="#viewItem">'.$item->code.'</a></td>';
+													echo '<tr><td><a href="#" data-toggle="modal" data-target="#viewItem'.$item->code.'">'.$item->code.'</a></td>';
 													echo '<td>'.$item->description.'</td>';
 													echo '<td>Warehouse 1</td>';
 													echo '<td>'.number_format($item->amount, 2, '.', ',').'</td>';
 													echo '<td>'.$item->quantity.'</td>'; ?>
 												</tr>
-												<div class="modal fade" id="viewItem" role="dialog">
+												<div class="modal fade" id="viewItem<?php echo $item->code;?>" role="dialog">
 													<div class="modal-dialog modal-sm">
 														<!-- Modal content-->
 														<div class="modal-content">
