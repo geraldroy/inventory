@@ -20,6 +20,7 @@ class Dashboard extends CI_Controller {
 	public function index() {
         $this->load->model('model_item');
         $data['items'] = $this->model_item->getItems();
+		$data['item_categories'] = $this->model_item->getCategories();
 		$this->load->view('header');
 		$this->load->view('view_dashboard', $data);
 		$this->load->view('footer');
@@ -33,13 +34,31 @@ class Dashboard extends CI_Controller {
 	
 	function editItem() {
 		$this->load->model('model_item');
-        $this->model_item->saveChanges();
+        $this->model_item->saveItem();
 		$this->index();
 	}
 	
 	function deleteItem() {
 		$this->load->model('model_item');
         $this->model_item->deleteItem();
+		$this->index();
+	}
+	
+	function createCategory() {
+		$this->load->model('model_item');
+        $this->model_item->addCategory();
+		$this->index();
+	}
+	
+	function editCategory() {
+		$this->load->model('model_item');
+        $this->model_item->saveCategory();
+		$this->index();
+	}
+	
+	function deleteCategory() {
+		$this->load->model('model_item');
+        $this->model_item->deleteCategory();
 		$this->index();
 	}
 }

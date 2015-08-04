@@ -43,6 +43,16 @@
 														<label>Description</label><br>
 														<input type="text" class="form-control" placeholder="Description" name="description">
 														<br>
+														<div class="form-group">
+															<label>Category</label>
+															<select class="form-control" name="category">
+																<?php
+																	foreach($item_categories->result() as $cat) {
+																		echo '<option value="'.$cat->id.'">'.$cat->name.'</option>';
+																	}
+																?>
+															 </select>
+														</div>
 														<label>Amount</label><br>
 														<div class="input-group">
 															<span class="input-group-addon">PHP</span>
@@ -86,24 +96,29 @@
 															<th "width: 350px">Description</th>
 															<th>Action</th>
 														</tr>
+														<?php foreach($item_categories->result() as $category) {
+															echo '
+															<form method="post">
+															<input type="hidden" name="id" value="'.$category->id.'">
+															<tr>
+															<td><input type="text" class="form-control categories-cell" placeholder="Category Name" value="'.$category->name.'" name="name"></td>
+															<td>'.$category->listing.'</td>
+															<td><input type="text" class="form-control categories-cell" placeholder="Description" value="'.$category->description.'" name="description"></td>
+															<td style="padding: 0px;"><input type="submit" class="btn btn-primary btn-xs margin" value="Save" formaction="'.base_url().'dashboard/editCategory" style="margin: 8px 0px 0px 0px">
+																	<input type="submit" class="btn btn-default btn-xs margin" value="Delete" formaction="'.base_url().'dashboard/deleteCategory" style="margin: 8px 0px 0px 0px"></td>
+															</tr>
+															</form>
+															';
+														}
+														?>
+														<form action="<?php echo base_url(); ?>dashboard/createCategory" method="post">
 														<tr>
-															<td><input type="text" class="form-control categories-cell" placeholder="Category Name" value="Warehouse 1"></td>
-															<td>2</td>
-															<td><input type="text" class="form-control categories-cell" placeholder="Description" value="Located at Los Banos, Laguna"></td>
-															<td><a href="#">Save </a>&nbsp;<a href="#"> Delete</a></td>
-														</tr>
-														<tr>
-															<td><input type="text" class="form-control categories-cell" placeholder="Category Name" value="Warehouse 2"></td>
-															<td>15</td>
-															<td><input type="text" class="form-control categories-cell" placeholder="Description" value="Located at Kawit Cavite"></td>
-															<td><a href="#">Save </a>&nbsp;<a href="#"> Delete</a></td>
-														</tr>
-														<tr>
-															<td><input type="text" class="form-control" placeholder="Category Name" style="background-color: transparent; border-width: 0px 0px 1px 0px; padding:0px; height:20px;"></td>
+															<td><input type="text" class="form-control categories-cell" placeholder="Category Name" name="name"></td>
 															<td></td>
-															<td><input type="text" class="form-control" placeholder="Description" style="background-color: transparent; border-width: 0px 0px 1px 0px; padding:0px; height:20px;"></td>
-															<td><a href="#">Add</a></td>
+															<td><input type="text" class="form-control categories-cell" placeholder="Description" name="description"></td>
+															<td style="padding: 0px;"><input type="submit" class="btn btn-primary btn-xs margin" value="Add" style="margin: 8px 0px 0px 0px"></td>
 														</tr>
+														</form>
 													</table>
 												</div>
 											</div>
@@ -126,7 +141,7 @@
 												foreach($items->result() as $item) {
 													echo '<tr><td><a href="#" data-toggle="modal" data-target="#viewItem'.$item->code.'">'.$item->code.'</a></td>';
 													echo '<td>'.$item->description.'</td>';
-													echo '<td>Warehouse 1</td>';
+													echo '<td>'.$item->name.'</td>';
 													echo '<td>'.number_format($item->amount, 2, '.', ',').'</td>';
 													echo '<td>'.$item->quantity.'</td>'; ?>
 												</tr>
@@ -149,6 +164,19 @@
 																	<label>Description</label><br>
 																	<input type="text" class="form-control" placeholder="Description" name="description" value="<?php echo $item->description; ?>">
 																	<br>
+																	<div class="form-group">
+																		 <label>Category</label>
+																		 <select class="form-control" name="category">
+																			<?php
+																				foreach($item_categories->result() as $cat) {
+																					if($cat->id == $item->category)
+																						echo '<option value="'.$cat->id.'" selected>'.$cat->name.'</option>';
+																					else
+																						echo '<option value="'.$cat->id.'">'.$cat->name.'</option>';
+																				}
+																			?>
+																		 </select>
+																	</div>
 																	<label>Amount</label><br>
 																	<div class="input-group">
 																		<span class="input-group-addon">PHP</span>
