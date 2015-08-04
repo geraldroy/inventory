@@ -49,9 +49,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="#">Dashboard</a></li>
-                            <li><a href="#">Purchase Order</a></li>
-                            <li><a href="#">Invoices</a></li>
-                            <li><a href="#">Summary</a></li>
+                            <li><a href="#">Purchase</a></li>
+                            <li><a href="#">Manufacture</a></li>
+                            <li><a href="#">Sell</a></li>
+							<li><a href="#">Users</a></li>
                         </ul>
                         <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
